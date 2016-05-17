@@ -10,7 +10,13 @@
           {{/each}}
         {{/isArray}}
         {{#hasKey this "_image"}}
-          <img src="{{{url}}}" alt="{{text}}" />
+          {{#each image}}
+            {{#hasKey this "href"}}
+              <a href="{{{href}}}" style="border: none;text-decoration: none;"><img src="{{{url}}}" alt="{{text}}" /></a>
+            {{else}}
+              <img src="{{{url}}}" alt="{{text}}" />
+            {{/hasKey}}
+          {{/each}}
         {{/hasKey}}
         {{#hasKey this "_link"}}
           <a href="{{{url}}}">{{text}}</a>

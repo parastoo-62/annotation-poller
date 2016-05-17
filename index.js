@@ -121,6 +121,7 @@ AnnotationPoller.prototype._applyReplacements = function (obj) {
       // escape any HTML in image links.
       if (row.image) {
         if (row.image.url) row.image.url = _this._escape(row.image.url)
+        if (row.image.href) row.image.href = _this._escape(row.image.href)
       }
 
       // flatten the row object into an ordered
