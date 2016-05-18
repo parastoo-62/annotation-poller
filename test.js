@@ -247,4 +247,55 @@ describe('annotation-poller', function () {
       }, 1000)
     })
   })
+
+  it('renders non-linked images', function (done) {
+    $.mockjax({
+      url: endpoint,
+      responseText: [{
+        id: 'test-image-render',
+        name: 'image render test integration',
+        fingerprint: 'tir',
+        rows: [{
+          image: {
+            url: 'http://www.example.com/img.png',
+            text: 'my awesome image link'
+          }
+        }]
+      }]
+    })
+
+    var poller = annotationPoller({pollInterval: 50, pkg: pkg})
+    poller.start(function () {
+      $('.addon-container:last > li > a').length.should.be.equal(0);
+      $('.addon-container:last > li > img').length.should.be.equal(1);
+      poller.stop()
+      return done()
+    })
+  })
+
+  it('renders image links', function (done) {
+    $.mockjax({
+      url: endpoint, 
+      responseText: [{
+        id: 'test-image-link',
+        name: 'image link test integration',
+        fingerprint: 'til',
+        rows: [{
+          image: {
+            url: 'http://www.example.com/img.png',
+            text: 'my awesome image link',
+            href: 'http://www.example.com/link'
+          }
+        }]
+      }]
+    })
+
+    var poller = annotationPoller({pollInterval: 50, pkg: pkg})
+    poller.start(function () {
+      $('.addon-container:last > li > a').length.should.be.equal(1);
+      $('.addon-container:last > li > a > img').length.should.be.equal(1);
+      poller.stop()
+      return done()
+    })
+  })
 })

@@ -3,11 +3,28 @@
     <li><h3>{{name}}</h3></li>
     {{#each rows}}
       <li>
+<<<<<<< HEAD
       {{#each this}}
         {{#isArray this}}
           {{#each this}}
             <a href="{{{url}}}">{{text}}</a>{{#unless @last}},{{/unless}}
           {{/each}}
+=======
+        {{#hasKey this "image"}}
+          {{#hasKey this.image "href"}}
+            <a href="{{{image.href}}}" style="border: none;text-decoration: none;"><img src="{{{image.url}}}" alt="{{image.text}}" /></a>
+          {{else}}
+            <img src="{{{image.url}}}" alt="{{image.text}}" />
+          {{/hasKey}}
+        {{/hasKey}}
+        {{#hasKey this "link"}}
+        {{#isArray this "link"}}
+        {{#each link}}
+          <a href="{{{url}}}">{{text}}</a>{{#unless @last}},{{/unless}}
+        {{/each}}
+        {{else}}
+          <a href="{{{link.url}}}">{{link.text}}</a>
+>>>>>>> Add conditional image link rendering and tests
         {{/isArray}}
         {{#hasKey this "_image"}}
           {{#each image}}
