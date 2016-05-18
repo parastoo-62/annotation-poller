@@ -4,11 +4,11 @@
     {{#each rows}}
       <li>
       {{#each this}}
-        {{#hasKey this "_link_array"}}
+        {{#isArray this}}
           {{#each this}}
             <a href="{{{url}}}">{{text}}</a>{{#unless @last}},{{/unless}}
           {{/each}}
-        {{/hasKey}}
+        {{/isArray}}
         {{#hasKey this "_image"}}
           <img src="{{{url}}}" alt="{{text}}" />
         {{/hasKey}}

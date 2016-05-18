@@ -23,8 +23,8 @@ AnnotationPoller.prototype._installExtensions = function () {
     }
   })
 
-  Handlebars.registerHelper('isArray', function (obj, key, options) {
-    if ($.isArray(obj[key])) {
+  Handlebars.registerHelper('isArray', function (obj, options) {
+    if ($.isArray(obj)) {
       return options.fn(this)
     } else {
       return options.inverse(this)
@@ -124,8 +124,7 @@ AnnotationPoller.prototype._applyReplacements = function (obj) {
       Object.keys(row).forEach(function (key) {
         var element = row[key]
         if (typeof element === 'string') element = {text: element}
-        if ($.isArray(element) && key === 'link') element._link_array = true
-        else element['_' + key] = true
+        element['_' + key] = true
         flattenedRow.push(element)
       })
 
