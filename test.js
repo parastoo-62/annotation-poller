@@ -275,7 +275,7 @@ describe('annotation-poller', function () {
 
   it('renders image links', function (done) {
     $.mockjax({
-      url: endpoint, 
+      url: endpoint,
       responseText: [{
         id: 'test-image-link',
         name: 'image link test integration',
@@ -301,7 +301,7 @@ describe('annotation-poller', function () {
 
   it('renders multiple images and image links', function (done) {
     $.mockjax({
-      url: endpoint, 
+      url: endpoint,
       responseText: [{
         id: 'test-multi-mixed-image-links',
         name: 'mixed multi image links',

@@ -3,42 +3,24 @@
     <li><h3>{{name}}</h3></li>
     {{#each rows}}
       <li>
-<<<<<<< HEAD
       {{#each this}}
-        {{#isArray this}}
-          {{#each this}}
-            <a href="{{{url}}}">{{text}}</a>{{#unless @last}},{{/unless}}
-          {{/each}}
-=======
-        {{#hasKey this "image"}}
-          {{#each image}}
-            {{#hasKey this "href"}}
-              <a href="{{{href}}}" style="border: none;text-decoration: none;"><img src="{{{url}}}" alt="{{text}}" /></a>
-            {{else}}
-              <img src="{{{url}}}" alt="{{text}}" />
-            {{/hasKey}}
-          {{/each}}
-        {{/hasKey}}
-        {{#hasKey this "link"}}
-        {{#isArray this "link"}}
-        {{#each link}}
-          <a href="{{{url}}}">{{text}}</a>{{#unless @last}},{{/unless}}
-        {{/each}}
-        {{else}}
-          <a href="{{{link.url}}}">{{link.text}}</a>
->>>>>>> Add conditional image link rendering and tests
-        {{/isArray}}
         {{#hasKey this "_image"}}
-          {{#each image}}
+          {{#each this}}
             {{#hasKey this "href"}}
-              <a href="{{{href}}}" style="border: none;text-decoration: none;"><img src="{{{url}}}" alt="{{text}}" /></a>
+            <a href="{{{href}}}" style="border: none;text-decoration: none;"><img src="{{{url}}}" alt="{{text}}" /></a>
             {{else}}
               <img src="{{{url}}}" alt="{{text}}" />
             {{/hasKey}}
           {{/each}}
         {{/hasKey}}
         {{#hasKey this "_link"}}
-          <a href="{{{url}}}">{{text}}</a>
+          {{#isArray this}}
+            {{#each this}}
+              <a href="{{{url}}}">{{text}}</a>{{#unless @last}},{{/unless}}
+            {{/each}}
+          {{else}}
+            <a href="{{{url}}}">{{text}}</a>
+          {{/isArray}}
         {{/hasKey}}
         {{#hasKey this "_text"}}
           <span>{{{text}}}</span>
