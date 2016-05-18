@@ -298,4 +298,39 @@ describe('annotation-poller', function () {
       return done()
     })
   })
+
+  it('renders multiple images and image links', function (done) {
+    $.mockjax({
+      url: endpoint, 
+      responseText: [{
+        id: 'test-multi-mixed-image-links',
+        name: 'mixed multi image links',
+        fingerprint: 'tmmil',
+        rows: [{
+          image: [{
+            url: 'http://www.example.com/img1.png',
+            text: 'my awesome image link',
+            href: 'http://www.example.com/link1'
+          }, {
+            url: 'http://www.example.com/img2.png',
+            text: 'my awesome image link'
+          }, {
+            url: 'http://www.example.com/img3.png',
+            text: 'my awesome image link',
+            href: 'http://www.example.com/link3'
+          }]
+        }]
+      }]
+    })
+
+    var poller = annotationPoller({pollInterval: 50, pkg: pkg})
+    poller.start(function () {
+      $('.addon-container:last > li > a').length.should.be.equal(2);
+      $('.addon-container:last > li > a > img').length.should.be.equal(2);
+      $('.addon-container:last > li > img').length.should.be.equal(1);
+      $('.addon-container:last > li img').length.should.be.equal(3);
+      poller.stop()
+      return done()
+    })
+  })
 })

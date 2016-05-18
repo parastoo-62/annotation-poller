@@ -11,11 +11,13 @@
           {{/each}}
 =======
         {{#hasKey this "image"}}
-          {{#hasKey this.image "href"}}
-            <a href="{{{image.href}}}" style="border: none;text-decoration: none;"><img src="{{{image.url}}}" alt="{{image.text}}" /></a>
-          {{else}}
-            <img src="{{{image.url}}}" alt="{{image.text}}" />
-          {{/hasKey}}
+          {{#each image}}
+            {{#hasKey this "href"}}
+              <a href="{{{href}}}" style="border: none;text-decoration: none;"><img src="{{{url}}}" alt="{{text}}" /></a>
+            {{else}}
+              <img src="{{{url}}}" alt="{{text}}" />
+            {{/hasKey}}
+          {{/each}}
         {{/hasKey}}
         {{#hasKey this "link"}}
         {{#isArray this "link"}}
