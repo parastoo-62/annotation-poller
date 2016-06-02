@@ -78,7 +78,7 @@ describe('annotation-poller', function () {
     $.mockjax({
       url: endpoint,
       status: 500,
-      responseText: "ENOGOOD"
+      responseText: 'ENOGOOD'
     })
 
     var poller = annotationPoller({pollInterval: 50, pkg: pkg})
@@ -266,8 +266,8 @@ describe('annotation-poller', function () {
 
     var poller = annotationPoller({pollInterval: 50, pkg: pkg})
     poller.start(function () {
-      $('.addon-container:last > li > a').length.should.be.equal(0);
-      $('.addon-container:last > li > img').length.should.be.equal(1);
+      $('.addon-container:last > li > a').length.should.be.equal(0)
+      $('.addon-container:last > li > img').length.should.be.equal(1)
       poller.stop()
       return done()
     })
@@ -292,8 +292,8 @@ describe('annotation-poller', function () {
 
     var poller = annotationPoller({pollInterval: 50, pkg: pkg})
     poller.start(function () {
-      $('.addon-container:last > li > a').length.should.be.equal(1);
-      $('.addon-container:last > li > a > img').length.should.be.equal(1);
+      $('.addon-container:last > li > a').length.should.be.equal(1)
+      $('.addon-container:last > li > a > img').length.should.be.equal(1)
       poller.stop()
       return done()
     })
@@ -325,18 +325,18 @@ describe('annotation-poller', function () {
 
     var poller = annotationPoller({pollInterval: 50, pkg: pkg})
     poller.start(function () {
-      $('.addon-container:last > li > a').length.should.be.equal(2);
-      $('.addon-container:last > li > a > img').length.should.be.equal(2);
-      $('.addon-container:last > li > img').length.should.be.equal(1);
-      $('.addon-container:last > li img').length.should.be.equal(3);
+      $('.addon-container:last > li > a').length.should.be.equal(2)
+      $('.addon-container:last > li > a > img').length.should.be.equal(2)
+      $('.addon-container:last > li > img').length.should.be.equal(1)
+      $('.addon-container:last > li img').length.should.be.equal(3)
       poller.stop()
       return done()
     })
   })
 
-  it('renders fullsize images', function (done) {
+  it('respects width and height if provided', function (done) {
     $.mockjax({
-      url: endpoint, 
+      url: endpoint,
       responseText: [{
         id: 'test-fullsize-images',
         name: 'fullsize images',
@@ -345,7 +345,8 @@ describe('annotation-poller', function () {
           image: {
             url: 'http://www.example.com/img1.png',
             text: 'my awesome image',
-            fullSize: true
+            width: '100%',
+            height: 'auto'
           }
         }]
       }]
@@ -353,8 +354,8 @@ describe('annotation-poller', function () {
 
     var poller = annotationPoller({pollInterval: 50, pkg: pkg})
     poller.start(function () {
-      $('.addon-container:last > li > img').length.should.be.equal(1);
-      $('.addon-container:last > li > img').css('width').should.be.equal('100%');
+      $('.addon-container:last > li > img').length.should.be.equal(1)
+      $('.addon-container:last > li > img').css('width').should.be.equal('100%')
       poller.stop()
       return done()
     })
